@@ -1,11 +1,15 @@
-FROM node:10.13-alpine
+FROM ubuntu:16.04
 
-WORKDIR /home
-COPY . .
-ENV TZ Asia/Seoul
+CMD ["echo","Hello world!""]
 
-RUN npm install
-CMD npm run start
+# FROM node:10.13-alpine
+
+# WORKDIR /home
+# COPY . .
+# ENV TZ Asia/Seoul
+
+# RUN npm install
+# CMD npm run start
 # FROM python:3.9-slim-buster as build
 
 # WORKDIR /app
