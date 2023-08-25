@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 
-CMD ["echo","Hello world!!!! 1212"]
+CMD ["echo","Hello world!!!! 12"]
 
 # FROM node:10.13-alpine
 
