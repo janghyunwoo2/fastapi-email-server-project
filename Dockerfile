@@ -1,16 +1,24 @@
-FROM python:3.9-slim-buster as build
+FROM node:10.13-alpine
 
-WORKDIR /app
+WORKDIR /home
+COPY . .
+ENV TZ Asia/Seoul
 
-COPY requirements.txt /app/requirements.txt
+RUN npm install
+CMD npm run start
+# FROM python:3.9-slim-buster as build
 
-RUN pip install --upgrade pip setuptools wheel
+# WORKDIR /app
 
-RUN pip install -r requirements.txt
+# COPY requirements.txt /app/requirements.txt
 
-COPY . /app
+# RUN pip install --upgrade pip setuptools wheel
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+# RUN pip install -r requirements.txt
+
+# COPY . /app
+
+# CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
 # FROM python:3
 # WORKDIR /app
 # COPY . .
