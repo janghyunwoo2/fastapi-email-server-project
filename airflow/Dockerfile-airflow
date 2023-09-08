@@ -1,0 +1,33 @@
+# Use the official Python image as a parent image
+FROM python:3.8
+
+# Set environment variables (modify as needed)
+ENV AIRFLOW_HOME=/usr/local/airflow
+ENV AIRFLOW__CORE__SQL_ALCHEMY_CONN=your_database_connection_string
+ENV AIRFLOW__CORE__EXECUTOR=LocalExecutor
+
+# Install necessary dependencies
+RUN yum update -y && yum install -y \
+    freetds \
+    python3-devel \
+    libffi \
+    libffi-devel \
+    openssl \
+    openssl-devel \
+    krb5-devel \
+    cyrus-sasl \
+    cyrus-sasl-devel \
+    openldap-devel \
+    gcc-c++
+
+# Install Apache Airflow
+RUN pip install apache-airflow
+
+# Initialize Airflow database
+RUN airflow initdb
+
+# Expose the web server port
+EXPOSE 8080
+
+# Start the Airflow web server
+CMD ["airflow", "webserver", "--port", "8080"]

@@ -1,0 +1,31 @@
+# Use the official Python image as a parent image
+FROM python:3.8
+
+# Set environment variables (modify as needed)
+ENV FLASK_ENV=development
+
+# Create and set the working directory
+WORKDIR /app
+
+# Copy the Flask application code into the container
+COPY . .
+
+# Install necessary Python packages
+RUN pip install -r requirements.txt
+
+# Expose the Flask application port
+EXPOSE 5000
+
+# Start the Flask application
+CMD ["flask", "run", "--host=0.0.0.0"]
+
+
+# FROM python:3.8-slim
+
+# COPY . /app
+
+# RUN pip3 install flask 
+
+# WORKDIR /app
+
+# CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0"]

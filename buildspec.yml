@@ -3,27 +3,22 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo Logging in to DockerHub...
-      - docker login -u $dockerhub_username -p $dockerhub_password
+      - echo Logging in to Amazon ECR...
+      - #ID=$aws_account_id
       - REPOSITORY_URI=$ecr_uri
-      - ID=$aws_account_id
-      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - IMAGE_TAG=${COMMIT_HASH:=latest}
+      #- aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin $REPOSITORY_URI
   build:
     commands:
-      - echo Build started on `date`
-      - echo Building the Docker image...
-      - docker build --platform linux/amd64 -t $REPOSITORY_URI:latest .
-      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - echo Building Docker images with Docker Compose...
+      - docker-compose -f ./docker-compose.yaml build
+
   post_build:
     commands:
-      - echo Build completed on `date`
-      - echo Logging in to Amazon ECR...
-      - aws --version
-      - aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin $ID.dkr.ecr.ap-northeast-2.amazonaws.com
-      - echo Pushing the Docker images...
-      - docker push $REPOSITORY_URI:$IMAGE_TAG
-      - echo Writing image definitions file...
-      - printf '[{"name":"'$ecs_container_name'","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-artifacts:
-    files: imagedefinitions.json
+      - echo Tagging and pushing Docker images to ECR...
+      - |
+        docker tag your-service1:latest $REPOSITORY_URI/service1:latest
+        docker tag your-service2:latest $REPOSITORY_URI/service2:latest
+        docker push $REPOSITORY_URI/service1:latest
+        docker push $REPOSITORY_URI/service2:latest
+
