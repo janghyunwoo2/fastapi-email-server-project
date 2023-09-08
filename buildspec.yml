@@ -18,9 +18,9 @@ phases:
   post_build:
     commands:
       - echo Tagging and pushing Docker images to ECR..
-      - docker tag my-service1:latest $REPOSITORY_URI/service1:latest
-      - docker tag my-service2:latest $REPOSITORY_URI/service2:latest
-      - docker push $REPOSITORY_URI/service1:latest
-      - docker push $REPOSITORY_URI/service2:latest
+      - docker tag my-service1:latest $REPOSITORY_URI:latest1
+      - docker tag my-service2:latest $REPOSITORY_URI:latest2
+      - docker push $REPOSITORY_URI:latest1
+      - docker push $REPOSITORY_URI:latest2
 
 
