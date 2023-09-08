@@ -23,6 +23,7 @@ CMD ["echo","Hello world!!!! hoe!!!!"]
 # COPY . /app
 
 # CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
+
 # FROM python:3
 # WORKDIR /app
 # COPY . .
