@@ -31,8 +31,8 @@ phases:
         image2_tag="latest2"
         
         image_definitions=(
-          "{\"name\":\"$ecs_container_name\",\"imageUri\":\"$REPOSITORY_URI:$image1_tag\"}"
-          "{\"name\":\"$ecs_container_name\",\"imageUri\":\"$REPOSITORY_URI:$image2_tag\"}"
+          "{\"name\":\"demotest1\",\"imageUri\":\"$REPOSITORY_URI:$image1_tag\"}"
+          "{\"name\":\"demotest2\",\"imageUri\":\"$REPOSITORY_URI:$image2_tag\"}"
         )
         
         image_definitions_json="[$(IFS=,; echo "${image_definitions[*]}")]"
