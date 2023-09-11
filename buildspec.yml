@@ -22,5 +22,6 @@ phases:
       - docker tag my-service2:latest $REPOSITORY_URI:latest2
       - docker push $REPOSITORY_URI:latest1
       - docker push $REPOSITORY_URI:latest2
-
+artifacts:
+    files: imagedefinitions.json
 

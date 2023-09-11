@@ -1,12 +1,14 @@
 version: '3'
 services:
   service1:
+    platform: linux/amd64
     build:
       context: ./service1
       dockerfile: Dockerfile
     image: my-service1:latest
 
   service2:
+    platform: linux/amd64
     build:
       context: ./service2
       dockerfile: Dockerfile
