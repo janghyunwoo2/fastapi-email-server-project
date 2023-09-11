@@ -1,15 +1,26 @@
 version: '3'
 services:
-  service1:
+  airflow:
     platform: linux/amd64
     build:
-      context: ./service1
-      dockerfile: Dockerfile
-    image: my-service1:latest
+      context: ./airflow
+      dockerfile: Dockerfile-airflow
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./airflow/dags:/usr/local/airflow/dags
+    environment:
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=your_database_connection_string
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+    image: airflow:latest
 
-  service2:
+  flask:
     platform: linux/amd64
     build:
-      context: ./service2
-      dockerfile: Dockerfile
-    image: my-service2:latest
+      context: ./flask
+      dockerfile: Dockerfile-flask
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+    image: flask:latest

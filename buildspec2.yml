@@ -18,8 +18,8 @@ phases:
   post_build:
     commands:
       - echo Tagging and pushing Docker images to ECR..
-      - docker tag airflow:latest $REPOSITORY_URI:latest1
-      - docker tag flask:latest $REPOSITORY_URI:latest2
+      - docker tag my-service1:latest $REPOSITORY_URI:latest1
+      - docker tag my-service2:latest $REPOSITORY_URI:latest2
       - docker push $REPOSITORY_URI:latest1
       - docker push $REPOSITORY_URI:latest2
       
