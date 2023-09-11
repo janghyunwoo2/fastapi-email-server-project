@@ -22,6 +22,25 @@ phases:
       - docker tag my-service2:latest $REPOSITORY_URI:latest2
       - docker push $REPOSITORY_URI:latest1
       - docker push $REPOSITORY_URI:latest2
+      
+
+      - >
+        container1_name="container1"
+        container2_name="container2"
+        image1_tag="latest1"
+        image2_tag="latest2"
+        
+        image_definitions=(
+          "{\"name\":\"$ecs_container_name\",\"imageUri\":\"$REPOSITORY_URI:$image1_tag\"}"
+          "{\"name\":\"$ecs_container_name\",\"imageUri\":\"$REPOSITORY_URI:$image2_tag\"}"
+        )
+        
+        image_definitions_json="[$(IFS=,; echo "${image_definitions[*]}")]"
+        
+        echo "$image_definitions_json" > imagedefinitions.json
+
+
+      #- printf '[{"name":"'$ecs_container_name'","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
     files: imagedefinitions.json
 
