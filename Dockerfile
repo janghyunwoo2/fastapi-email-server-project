@@ -1,6 +1,6 @@
-FROM ubuntu:16.04
+#FROM ubuntu:16.04
 
-CMD ["echo","Hello world!!!! hoe!!!!"]
+#CMD ["echo","Hello world!!!! hoe!!!!"]
 
 # FROM node:10.13-alpine
 
@@ -24,13 +24,13 @@ CMD ["echo","Hello world!!!! hoe!!!!"]
 
 # CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
 
-# FROM python:3
-# WORKDIR /app
-# COPY . .
-# RUN python3 -m pip install --upgrade pip
-# RUN python3 -m pip install --no-cache-dir -r requirements.txt
-# ENV FLASK_APP=mypython.py
-# ENV FLASK_ENV=development
-# ENV FLASK_RUN_HOST=0.0.0.0
-# EXPOSE 5000
-# CMD ["flask", "run"]
+FROM python:3
+WORKDIR /app
+COPY . .
+RUN python3 -m pip install --upgrade pip
+RUN python3 -m pip install --no-cache-dir -r requirements.txt
+ENV FLASK_APP=mypython.py
+ENV FLASK_ENV=development
+ENV FLASK_RUN_HOST=0.0.0.0
+EXPOSE 5000
+CMD ["flask", "run"]

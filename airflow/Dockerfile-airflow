@@ -7,18 +7,18 @@ ENV AIRFLOW__CORE__SQL_ALCHEMY_CONN=your_database_connection_string
 ENV AIRFLOW__CORE__EXECUTOR=LocalExecutor
 
 # Install necessary dependencies
-RUN apt update -y && apt install -y \
-    freetds \
-    python3-devel \
-    libffi \
-    libffi-devel \
-    openssl \
-    openssl-devel \
-    krb5-devel \
-    cyrus-sasl \
-    cyrus-sasl-devel \
-    openldap-devel \
-    gcc-c++
+# RUN apt update -y && apt install -y \
+#     freetds \
+#     python3-devel \
+#     libffi \
+#     libffi-devel \
+#     openssl \
+#     openssl-devel \
+#     krb5-devel \
+#     cyrus-sasl \
+#     cyrus-sasl-devel \
+#     openldap-devel \
+#     gcc-c++
 
 # Install Apache Airflow
 RUN pip install apache-airflow
