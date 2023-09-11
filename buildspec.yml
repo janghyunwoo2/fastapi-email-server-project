@@ -23,6 +23,7 @@ phases:
       - docker push $REPOSITORY_URI:latest1
       - docker push $REPOSITORY_URI:latest2
       
+      
       - >
         container1_name="container1"
         container2_name="container2"
