@@ -7,7 +7,7 @@ ENV AIRFLOW__CORE__SQL_ALCHEMY_CONN=your_database_connection_string
 ENV AIRFLOW__CORE__EXECUTOR=LocalExecutor
 
 # Install necessary dependencies
-RUN yum update -y && yum install -y \
+RUN apt update -y && apt install -y \
     freetds \
     python3-devel \
     libffi \
